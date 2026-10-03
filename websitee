@@ -1,0 +1,217 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Alert</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        background: #020403;
+        color: #00ff66;
+        font-family: "Courier New", monospace;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .screen {
+        width: 92%;
+        max-width: 900px;
+        border: 1px solid #00ff66;
+        padding: 35px;
+        box-shadow: 0 0 30px rgba(0,255,100,.2);
+        background: rgba(0,10,5,.95);
+    }
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #00ff66;
+        padding-bottom: 15px;
+        margin-bottom: 25px;
+    }
+
+    .warning {
+        color: #ff3030;
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        margin: 20px 0;
+        animation: blink .7s infinite;
+    }
+
+    .terminal {
+        line-height: 1.8;
+        min-height: 230px;
+    }
+
+    .progress {
+        width: 100%;
+        height: 18px;
+        border: 1px solid #00ff66;
+        margin-top: 20px;
+    }
+
+    .bar {
+        width: 0%;
+        height: 100%;
+        background: #00ff66;
+        transition: width .2s;
+    }
+
+    .percent {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .prank {
+        display: none;
+        text-align: center;
+        padding: 30px 10px;
+    }
+
+    .prank h1 {
+        font-size: 55px;
+        color: #00ff66;
+        text-shadow: 0 0 20px #00ff66;
+    }
+
+    .prank p {
+        color: white;
+        font-size: 20px;
+    }
+
+    button {
+        background: transparent;
+        color: #00ff66;
+        border: 1px solid #00ff66;
+        padding: 12px 25px;
+        font-family: inherit;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    button:hover {
+        background: #00ff66;
+        color: black;
+    }
+
+    @keyframes blink {
+        50% { opacity: .25; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="screen">
+
+    <div id="main">
+
+        <div class="top">
+            <span>SECURITY TERMINAL</span>
+            <span id="time">00:00:00</span>
+        </div>
+
+        <div class="warning">
+            ⚠ SYSTEM BREACH DETECTED ⚠
+        </div>
+
+        <div class="terminal" id="terminal">
+            > Initializing security system...<br>
+        </div>
+
+        <div class="progress">
+            <div class="bar" id="bar"></div>
+        </div>
+
+        <div class="percent" id="percent">0%</div>
+
+    </div>
+
+    <div class="prank" id="prank">
+        <h1>HACKED!</h1>
+        <p>Your device is completely hacked.</p>
+        <p>hacked at ip:5678ysj</p>
+
+        <button onclick="location.reload()">no back</button>
+    </div>
+
+</div>
+
+<script>
+
+const terminal = document.getElementById("terminal");
+const bar = document.getElementById("bar");
+const percent = document.getElementById("percent");
+
+const messages = [
+    "> Connecting to remote security server...",
+    "> Scanning system...",
+    "> Checking network...",
+    "> Detecting devices...",
+    "> Security bypass detected...",
+    "> Encrypting files...",
+    "> Accessing system...",
+    "> WARNING: UNAUTHORIZED ACCESS",
+    "> SYSTEM COMPROMISED...",
+    "> FINALIZING..."
+];
+
+let progress = 0;
+let messageIndex = 0;
+
+function addMessage() {
+    if (messageIndex < messages.length) {
+        terminal.innerHTML += messages[messageIndex] + "<br>";
+        messageIndex++;
+    }
+}
+
+const scan = setInterval(() => {
+
+    progress += Math.floor(Math.random() * 5) + 1;
+
+    if (progress > 100) {
+        progress = 100;
+    }
+
+    bar.style.width = progress + "%";
+    percent.textContent = progress + "%";
+
+    if (progress % 10 < 4) {
+        addMessage();
+    }
+
+    if (progress >= 100) {
+        clearInterval(scan);
+
+        setTimeout(() => {
+            document.getElementById("main").style.display = "none";
+            document.getElementById("prank").style.display = "block";
+        }, 1800);
+    }
+
+}, 250);
+
+
+// Fake clock
+setInterval(() => {
+    document.getElementById("time").textContent =
+        new Date().toLocaleTimeString();
+}, 1000);
+
+</script>
+
+</body>
+</html>
+```
